@@ -8,6 +8,6 @@ public class demoController {
 
     @GetMapping("/view")
     public String view() {
-        return "hello world test4";
+        return "hello world test5";
     }
 }
