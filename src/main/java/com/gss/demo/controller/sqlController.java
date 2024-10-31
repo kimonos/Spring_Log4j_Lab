@@ -9,6 +9,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -39,11 +41,7 @@ public class sqlController {
     private UserRepository userRepository;
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> findUserFromId(@PathVariable("id") Long id) {
-        // 輸入驗證，確保 ID 為正數
-        if (id <= 0) {
-            return ResponseEntity.badRequest().build(); // 返回 400 Bad Request
-        }
+    public ResponseEntity<User> findUserFromId(@PathVariable("id")  Long id) {
 
         // 查詢用戶
         Optional<User> userOptional = userRepository.findById(id);
