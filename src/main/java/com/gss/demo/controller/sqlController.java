@@ -4,6 +4,8 @@ package com.gss.demo.controller;
 import com.gss.demo.enity.User;
 import com.gss.demo.repository.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,13 +44,8 @@ public class sqlController {
     public ResponseEntity<User> findUserFromId(
             @PathVariable("id")
             Long id) {
-
-        if (id == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        return userRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+            Optional<User> userOptional = userRepository.findById(id);
+            return userOptional.map(user -> ResponseEntity.ok(user))
+                    .orElse(ResponseEntity.notFound().build());
     }
 }
