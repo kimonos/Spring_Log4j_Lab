@@ -2,6 +2,7 @@ package com.gss.demo.enity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "users")
@@ -11,8 +12,8 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String password;
-
+//    private String password;
+    private char[] password; // 使用 char[]
 
     public Long getId() {
         return id;
@@ -22,7 +23,10 @@ public class User implements Serializable {
         return name;
     }
 
-    public String getPassword() {
+//    public String getPassword() {
+//        return password;
+//    }
+    public char[] getPassword() {
         return password;
     }
 
@@ -34,7 +38,17 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public void setPassword(String password) {
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+    public void setPassword(char[] password) {
         this.password = password;
+    }
+
+    public void clearPassword() {
+        if (this.password != null) {
+            Arrays.fill(this.password, '0'); // 清空密碼
+            this.password = null;
+        }
     }
 }

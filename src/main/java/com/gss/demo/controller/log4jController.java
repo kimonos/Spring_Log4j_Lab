@@ -14,8 +14,8 @@ import java.util.Map;
 @RestController
 @Scope(value = "prototype")
 public class log4jController {
-//    private Logger log = LogManager.getLogger(log4jController.class);
-//
+    private Logger log = LogManager.getLogger(log4jController.class);
+
 //    @PostMapping("/login")
 //    public String login(@RequestBody Map req) {
 //
@@ -27,36 +27,19 @@ public class log4jController {
 //
 //        return "login";
 //    }
-private static final Logger log = LogManager.getLogger(log4jController.class);
-
-    @PostMapping("/login")
-    public String login(@RequestBody Map<String, Object> req) {
-        String user = null;
-        char[] password = null;
+@PostMapping("/login")
+    public String login(@RequestBody Map req) {
+        String user = req.get("user").toString();
+        char[] password = req.get("password").toString().toCharArray(); // 使用 char[]
 
         try {
-            user = String.valueOf(req.get("user"));
-            // 將密碼轉換為 char array
-            String tempPass = String.valueOf(req.get("password"));
-            password = tempPass.toCharArray();
-
-            // 進行必要的密碼驗證操作
-
-            // 記錄登入嘗試，但不記錄實際密碼
-            log.info("Login attempt for user: {}", user);
-
-            return "login successful";
-        } catch (Exception e) {
-            log.error("Login error for user: {}", user);
-            return "login failed";
+            log.error("user:{}, password:{}", user, new String(password)); // 這樣日誌仍然可以記錄
+            // 其他處理邏輯
         } finally {
-            // 清除密碼相關的敏感數據
-            if (password != null) {
-                Arrays.fill(password, '\0');
-            }
-
-            // 強制觸發 GC 建議（開發環境可用，生產環境建議移除）
-            // System.gc();
+            // 清除密碼
+            Arrays.fill(password, '0'); // 將密碼清空
         }
+
+        return "login";
     }
 }
