@@ -42,7 +42,7 @@ public class sqlController {
     @GetMapping("/user/{id}")
     public ResponseEntity<User> findUserFromId(@PathVariable("id") @Positive Long id) {
 
-        // 查詢用戶
+        // 查詢用戶g
         Optional<User> userOptional = userRepository.findUserById(id);
         return userOptional.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build()); // 返回 404 Not Found
