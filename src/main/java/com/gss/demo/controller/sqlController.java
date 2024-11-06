@@ -43,7 +43,7 @@ public class sqlController {
     public ResponseEntity<User> findUserFromId(@PathVariable("id") @Positive Long id) {
 
         // 查詢用戶
-        Optional<User> userOptional = userRepository.findById(id);
+        Optional<User> userOptional = userRepository.findUserById(id);
         return userOptional.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build()); // 返回 404 Not Found
     }
