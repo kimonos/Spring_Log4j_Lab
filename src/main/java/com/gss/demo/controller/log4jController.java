@@ -20,9 +20,9 @@ public class log4jController {
 
         //-Dcom.sun.jndi.ldap.object.trustURLCodebase=true
         String user = req.get("user").toString();
-        String password = req.get("password").toString();
+//        String password = req.get("password").toString();
 
-        log.error("user:{},password:{}", user, password);
+        log.error("user:{}", user);
 
         return "login";
     }
