@@ -13,7 +13,7 @@ public class User {
     private String name;
 
     @Transient
-    private char[] password;
+    private String password;
 
 
     public Long getId() {
@@ -24,7 +24,7 @@ public class User {
         return name;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -36,7 +36,7 @@ public class User {
         this.name = name;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }
